@@ -6,6 +6,7 @@ const appNameHeader = document.querySelector('.app-name-header');
 const searchBar = document.querySelector('.search-bar');
 const cityNameInput = document.querySelector('.city');
 const searchButton = document.querySelector('.search-bar button');
+const errorMessage = document.querySelector('.error');
 const description = document.querySelector('.description');
 
 // Boolean to confirm that the user didn't look yet for the city 
@@ -97,6 +98,8 @@ function search() {
           cursor: pointer;
         `;
 
+        
+
         // City name header
         const cityNameHeader = document.createElement('h2');
         cityNameHeader.textContent = city.toUpperCase();
@@ -105,7 +108,7 @@ function search() {
 
         // Element to show the city image
         const cityImage = document.createElement('img');
-        cityImage.src = "images/Los Angeles.png";
+        cityImage.src = "./assets/images/LosAngeles.png";
         cityImage.classList.add('city-image');
         card.appendChild(cityImage);
 
@@ -173,7 +176,17 @@ function search() {
         console.log(error);
       });
   } else if (city.trim() !== '' && city.toUpperCase() !== 'LOS ANGELES') {
-    alert("Sorry, we don't have information about this city.");
+    errorMessage.innerHTML = "This city doesn't exist."
+    const errorDiv = document.querySelector('.error');
+
+// Hide the error message after 1.5 secs
+    function hideError() {
+        errorDiv.style.display = 'none';
+    }
+    errorDiv.style.display = 'block';
+
+    setTimeout(hideError, 1500);
+
   }
 }
 
